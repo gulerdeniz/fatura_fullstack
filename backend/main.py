@@ -6,13 +6,21 @@ from models import Invoice
 from schemas import InvoiceCreate, InvoiceResponse
 from datetime import date
 import models
+import os
 
 models.Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
+# Lokal gelistirme icin localhost her zaman acik.
+# Production frontend adresi FRONTEND_URL environment variable'i ile eklenir (Render dashboard'dan ayarlanir).
+allowed_origins = ["http://localhost:5173"]
+frontend_url = os.environ.get("FRONTEND_URL")
+if frontend_url:
+    allowed_origins.append(frontend_url)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=allowed_origins,
     allow_methods=["*"],
     allow_headers=["*"],
 )
