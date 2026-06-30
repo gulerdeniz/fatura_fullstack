@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react"
 
+// Deploy edilince Vercel/Netlify'da VITE_API_URL environment variable'i ile
+// gercek backend adresi set edilir. Lokal gelistirmede localhost kullanilir.
+const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000"
+
 function App() {
   const [invoices, setInvoices] = useState([])
   const [form, setForm] = useState({
@@ -8,7 +12,7 @@ function App() {
   })
 
   const fetchInvoices = async () => {
-    const res = await fetch("http://127.0.0.1:8000/invoices")
+    const res = await fetch(`${API_URL}/invoices`)
     const data = await res.json()
     setInvoices(data)
   }
@@ -18,7 +22,7 @@ function App() {
   }, [])
 
   const handleSubmit = async () => {
-    await fetch("http://127.0.0.1:8000/invoices", {
+    await fetch(`${API_URL}/invoices`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
