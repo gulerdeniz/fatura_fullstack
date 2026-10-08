@@ -1,184 +1,69 @@
-# Expense Tracker API
+# Fatura Fullstack
 
-🔗 **Live Demo:** [expense-tracker-api-o931.onrender.com/docs](https://expense-tracker-api-o931.onrender.com/docs)
-💻 **Source Code:** [github.com/gulerdeniz/expense_tracker](https://github.com/gulerdeniz/expense_tracker)
+A fullstack invoice creation tool with a FastAPI backend and a React frontend.  
+🔗 Live Demo: [fatura-fullstack.vercel.app](https://fatura-fullstack.vercel.app)
 
-> Note: hosted on Render's free tier — the first request after a period of inactivity may take 30-50 seconds to wake up the server.
-
----
-
-## Versions
-
-  v1.3.0
-- Added API integration tests with pytest
-- Verified CRUD endpoints using TestClient
-
-v1.2.0
-- cleaner architecture
-- separation of concerns
-- easier testing
-- more scalable structure
-
-v1.1.0
-- Implemented FastAPI backend API
-- Added SQLAlchemy ORM integration
-- Created Expense model and database schema
-- Implemented full CRUD endpoints:
-  - POST /expenses
-  - GET /expenses
-  - GET /expenses/{id}
-  - PUT /expenses/{id}
-  - DELETE /expenses/{id}
-- Added request validation with Pydantic schemas
-- Enabled automatic Swagger API documentation (/docs)
-
-A Python-based backend API that allows users to create, read, update, and delete expenses. Built using FastAPI and SQLAlchemy ORM.
-
----
+> **Note:** Backend is hosted on a free tier platform, so the initial request may take 30-50 seconds to spin up if it has been idle.
 
 ## Features
-
-* Full CRUD operations:
-
-  * Create expense
-  * Read all expenses
-  * Read single expense by ID
-  * Update expense
-  * Delete expense
-* SQLite database integration
-* ORM support with SQLAlchemy
-* Request validation with Pydantic
-* Automatic API documentation (Swagger UI)
-
----
+* Create an invoice with recipient, seller, product, and tax details
+* Automatic total and tax (VAT) calculation
+* List and view all saved invoices from the database
+* Interactive API documentation via Swagger UI
 
 ## Tech Stack
 
+### Backend
 * Python
 * FastAPI
 * SQLAlchemy (ORM)
-* SQLite
 * Pydantic
 * Uvicorn
+* SQLite
 
----
+### Frontend
+* React 19
+* Vite
+* ESLint
 
 ## Project Structure
-
-```
-expense_tracker/
+fatura_fullstack/
 │
-├── main.py          # API endpoints
-├── database.py      # DB connection & session
-├── models.py        # ORM models
-├── schemas.py       # Request/Response schemas
-├── requirements.txt
+├── backend/     # FastAPI REST API
+├── frontend/    # React + Vite UI
 └── README.md
-```
-
----
-
-## API Endpoints
-
-### Create Expense
-
-```
-POST /expenses
-```
-
-### Get All Expenses
-
-```
-GET /expenses
-```
-
-### Get Expense by ID
-
-```
-GET /expenses/{id}
-```
-
-### Update Expense
-
-```
-PUT /expenses/{id}
-```
-
-### Delete Expense
-
-```
-DELETE /expenses/{id}
-```
-
----
-
-## Example Request (POST)
-
-```json
-{
-  "amount": 100,
-  "category": "food",
-  "description": "dinner",
-  "date": "2026-03-17"
-}
-```
-
----
 
 ## Running the Project
 
-### 1. Create virtual environment
-
-```
+### Backend
+cd backend
 python -m venv venv
-```
-
-### 2. Activate environment
-
-Windows:
-
-```
-venv\Scripts\activate
-```
-
-### 3. Install dependencies
-
-```
+venv\Scripts\activate        # Windows
 pip install -r requirements.txt
-```
-
-### 4. Run server
-
-```
 uvicorn main:app --reload
-```
 
----
+API docs will be available at: http://127.0.0.1:8000/docs
 
-## API Documentation
+### Frontend
+cd frontend
+npm install
+npm run dev
+Open the local URL printed in the terminal (Vite default: http://localhost:5173).
 
-Once the server is running, open:
+## API Endpoints
 
-```
-http://127.0.0.1:8000/docs
-```
+* `GET /` - Check API status
+* `POST /invoices` - Create a new invoice
+* `GET /invoices` - Retrieve all invoices
 
-Interactive Swagger UI will allow you to test all endpoints.
-
----
+## Screenshots
+*(Buraya uygulamanın arayüzüne ait bir ekran görüntüsü ekleyebilirsin)*
 
 ## Future Improvements
-
-* Add authentication (JWT)
-* Add category-based reports
-* Refactor into service/crud layer
-* Add unit and integration tests
-* Support PostgreSQL
-
----
+* Authentication & Authorization (JWT)
+* PostgreSQL support for production
+* Docker setup & containerization
+* PDF export and download options for invoices
 
 ## Purpose
-
-This project is built as part of learning backend development with Python, focusing on API design, ORM usage, and clean architecture.
-
----
+Built as a portfolio project to practice fullstack development: REST API design with FastAPI and a modern React frontend.
